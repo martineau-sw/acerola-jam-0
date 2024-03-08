@@ -1,0 +1,166 @@
+[gd_scene load_steps=12 format=3 uid="uid://dqbvrxg0r1w1g"]
+
+[ext_resource type="Script" path="res://scripts/dialogue/DialogueUI.gd" id="1_w6ihk"]
+[ext_resource type="FontFile" uid="uid://cafehtnf36p62" path="res://fonts/FeltTipWomanNormal.otf" id="2_jmv67"]
+[ext_resource type="FontFile" uid="uid://dx8pl7yyueapr" path="res://fonts/FeltTipWomanBold.otf" id="3_sata6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3hsxe"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.207843)
+shadow_size = 20
+shadow_offset = Vector2(-20.09, -15.49)
+
+[sub_resource type="FontVariation" id="FontVariation_2q6yy"]
+base_font = ExtResource("2_jmv67")
+
+[sub_resource type="FontVariation" id="FontVariation_ghomo"]
+base_font = ExtResource("3_sata6")
+
+[sub_resource type="FontVariation" id="FontVariation_4wpy2"]
+base_font = ExtResource("2_jmv67")
+variation_transform = Transform2D(1, 0.5, 2.08165e-12, 1, 2.08165e-12, 2.08165e-12)
+
+[sub_resource type="FontVariation" id="FontVariation_xs1te"]
+base_font = ExtResource("3_sata6")
+variation_transform = Transform2D(1, 0.5, 2.08165e-12, 1, 2.08165e-12, 2.08165e-12)
+
+[sub_resource type="Animation" id="Animation_2hy2h"]
+resource_name = "dialogue_show"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BoxVAlign:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.329877, 1),
+"update": 0,
+"values": [Vector2(2.08165e-12, 1000), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5k7sd"]
+resource_name = "dialogue_hide"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BoxVAlign:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.329877, 1),
+"update": 0,
+"values": [Vector2(2.08165e-12, 2.08165e-12), Vector2(2.08165e-12, 1000)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a23km"]
+_data = {
+"dialogue_hide": SubResource("Animation_5k7sd"),
+"dialogue_show": SubResource("Animation_2hy2h")
+}
+
+[node name="DialogueBox" type="CanvasLayer"]
+transform = Transform2D(1, 2.08165e-12, -2.08165e-12, 1, 0, 0)
+script = ExtResource("1_w6ihk")
+
+[node name="BoxVAlign" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1000.0
+offset_bottom = 1000.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BoxMarginTop" type="Control" parent="BoxVAlign"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.3
+
+[node name="BoxHAlign" type="HBoxContainer" parent="BoxVAlign"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BoxMarginLeft" type="Control" parent="BoxVAlign/BoxHAlign"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Box" type="Panel" parent="BoxVAlign/BoxHAlign"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_3hsxe")
+
+[node name="TextVAlign" type="VBoxContainer" parent="BoxVAlign/BoxHAlign/Box"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextMarginTop" type="Control" parent="BoxVAlign/BoxHAlign/Box/TextVAlign"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BoxVAlign/BoxHAlign/Box/TextVAlign"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextMarginLeft" type="Control" parent="BoxVAlign/BoxHAlign/Box/TextVAlign/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="Text" type="RichTextLabel" parent="BoxVAlign/BoxHAlign/Box/TextVAlign/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = SubResource("FontVariation_2q6yy")
+theme_override_fonts/bold_font = SubResource("FontVariation_ghomo")
+theme_override_fonts/italics_font = SubResource("FontVariation_4wpy2")
+theme_override_fonts/bold_italics_font = SubResource("FontVariation_xs1te")
+theme_override_font_sizes/normal_font_size = 60
+theme_override_font_sizes/bold_font_size = 60
+theme_override_font_sizes/italics_font_size = 60
+theme_override_font_sizes/bold_italics_font_size = 60
+bbcode_enabled = true
+text = "Hello, World!"
+
+[node name="TextMarginRight" type="Control" parent="BoxVAlign/BoxHAlign/Box/TextVAlign/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="TextMarginBottom" type="Control" parent="BoxVAlign/BoxHAlign/Box/TextVAlign"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="BoxMarginRight" type="Control" parent="BoxVAlign/BoxHAlign"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="BoxMarginBottom" type="Control" parent="BoxVAlign"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_a23km")
+}

@@ -1,0 +1,856 @@
+[gd_scene load_steps=12 format=3 uid="uid://2pybkm4bly7u"]
+
+[ext_resource type="Script" path="res://scripts/MainCamera.gd" id="1_sgi52"]
+[ext_resource type="PackedScene" uid="uid://dqbvrxg0r1w1g" path="res://scenes/ui.tscn" id="1_yxnah"]
+[ext_resource type="PackedScene" uid="uid://cirk5hxxmhdqw" path="res://scenes/player.tscn" id="2_nnovq"]
+[ext_resource type="Texture2D" uid="uid://cfvf66pkagaig" path="res://images/grass_tileset.png" id="3_hd21j"]
+[ext_resource type="Script" path="res://scripts/dialogue/DialogueZone.gd" id="5_bsupx"]
+[ext_resource type="Script" path="res://scripts/dialogue/DialogueResource.gd" id="6_a2uru"]
+[ext_resource type="FontFile" uid="uid://cafehtnf36p62" path="res://fonts/FeltTipWomanNormal.otf" id="7_mvll4"]
+[ext_resource type="PackedScene" uid="uid://dkv5ivkfuo2fs" path="res://scenes/battle_scene.tscn" id="8_x0aji"]
+
+[sub_resource type="Resource" id="Resource_pywt1"]
+script = ExtResource("6_a2uru")
+lines = PackedStringArray("Hey!", "How\'s it going?")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_npf42"]
+
+[sub_resource type="FontVariation" id="FontVariation_ygks7"]
+base_font = ExtResource("7_mvll4")
+
+[node name="World" type="Node3D"]
+
+[node name="DialogueBox" parent="." instance=ExtResource("1_yxnah")]
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 0.673038, 0.739608, 0, -0.739608, 0.673038, 0.189997, 3.90447, 5.27758)
+fov = 53.6
+size = 5.054
+near = 0.016
+script = ExtResource("1_sgi52")
+target = NodePath("../Player")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Camera3D"]
+transform = Transform3D(0.820059, -0.275997, 0.501327, 0.392561, 0.908719, -0.141863, -0.416412, 0.313138, 0.853549, 4.61891, -0.654027, 0.696836)
+light_color = Color(0.537255, 0.768627, 1, 1)
+light_volumetric_fog_energy = 0.0
+light_cull_mask = 4293918721
+shadow_bias = 0.0
+shadow_normal_bias = 0.0
+shadow_transmittance_bias = 6.006
+shadow_opacity = 0.81
+shadow_blur = 5.951
+directional_shadow_mode = 0
+directional_shadow_split_1 = 0.118
+directional_shadow_split_2 = 0.096
+directional_shadow_split_3 = 0.08
+directional_shadow_blend_splits = true
+directional_shadow_fade_start = 0.0
+directional_shadow_max_distance = 2.6
+directional_shadow_pancake_size = 0.0
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Camera3D"]
+transform = Transform3D(0.820059, -0.275997, 0.501327, 0.392561, 0.908719, -0.141863, -0.416412, 0.313138, 0.853549, 4.38881, 0.432209, -4.65588)
+light_color = Color(0.933333, 0.678431, 0.286275, 1)
+light_volumetric_fog_energy = 0.0
+light_cull_mask = 4293918721
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_normal_bias = 0.0
+shadow_transmittance_bias = 4.472
+shadow_blur = 1.738
+directional_shadow_mode = 0
+directional_shadow_split_1 = 0.118
+directional_shadow_split_2 = 0.096
+directional_shadow_split_3 = 0.08
+directional_shadow_blend_splits = true
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 26.5
+directional_shadow_pancake_size = 0.0
+
+[node name="Environment" type="Node3D" parent="."]
+transform = Transform3D(1, 0, -1.05879e-21, 4.15924e-24, 1.19249e-08, 1, 0, -1, 1.19249e-08, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+
+[node name="grass_center" type="Sprite3D" parent="Environment"]
+transform = Transform3D(4.01895, -1.93542e-36, 1.51166e-37, 1.9829e-38, 3.00872, 0, -7.7669e-31, -1.94568e-15, 1.004, -3, 2.08165e-12, 2.08124e-12)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(10, 10, 256, 256)
+
+[node name="grass_center5" type="Sprite3D" parent="Environment"]
+transform = Transform3D(14.9632, -1.40901e-35, 1.51166e-37, 1.22318e-38, 10.9908, 0, -8.47376e-30, -8.20962e-15, 1.004, -3, 3, -3.57726e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(10, 10, 256, 256)
+
+[node name="grass_center2" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.004, -2.10433e-37, 1.51166e-37, 1.89697e-38, 1.004, 0, -6.34848e-32, -2.52749e-16, 1.004, 3, -2, 2.38519e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(10, 10, 256, 256)
+
+[node name="grass_center3" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.004, -2.10433e-37, 1.51166e-37, 2.55452e-38, 1.004, 0, -6.34848e-32, -2.52749e-16, 1.004, 3, -3, 3.57768e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(10, 10, 256, 256)
+
+[node name="grass_center4" type="Sprite3D" parent="Environment"]
+transform = Transform3D(7.97776, -1.4363e-36, 1.00974e-28, 2.37359e-37, 6.02548, 0, -2.45463e-30, -1.7005e-15, 1.005, 4, -3, 3.57768e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(10, 10, 256, 256)
+
+[node name="grass_path_edge6" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.004, 0, 0, 0, 1.004, 0, 0, 0, 1.004, 1, 2.08165e-12, 2.081e-12)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 768, 256, 256)
+
+[node name="grass_path inner" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.004, -2.10433e-37, 1.51166e-37, 3.86964e-38, 1.004, 0, -6.34848e-32, -2.52749e-16, 1.004, 2, -1, 1.1927e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(768, 768, 256, 256)
+
+[node name="grass_path inner2" type="Sprite3D" parent="Environment"]
+transform = Transform3D(-1.004, -8.77725e-08, 1.04668e-15, 8.77725e-08, -1.004, 2.39452e-08, -1.04668e-15, 2.39452e-08, 1.004, 2, 2.08165e-12, 2.08011e-12)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(768, 768, 256, 256)
+
+[node name="grass_path inner3" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.31659e-07, -1.004, 1.19726e-08, 1.004, 1.31659e-07, 1.19726e-08, -1.19726e-08, 1.19726e-08, 1.004, 3, -4, 4.77017e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(768, 768, 256, 256)
+
+[node name="grass_path_edge10" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.004, -2.10433e-37, 1.51166e-37, 1.23941e-38, 1.004, 0, -6.34848e-32, -2.52749e-16, 1.004, 1.00801, 0.99951, -4.88754e-07)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 512, 256, 256)
+
+[node name="grass_path_edge7" type="Sprite3D" parent="Environment"]
+transform = Transform3D(-4.38862e-08, 1.004, -1.19726e-08, -1.004, -4.38862e-08, 1.19726e-08, 1.19726e-08, 1.19726e-08, 1.004, 3, -3, 2.08165e-12)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 768, 256, 256)
+
+[node name="grass_path_edge11" type="Sprite3D" parent="Environment"]
+transform = Transform3D(-4.38862e-08, 1.004, -1.19726e-08, -1.004, -4.38862e-08, 1.19726e-08, 1.19726e-08, 1.19726e-08, 1.004, 4, -3, 2.08165e-12)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 512, 256, 256)
+
+[node name="grass_path_edge8" type="Sprite3D" parent="Environment"]
+transform = Transform3D(-4.38862e-08, 1.004, -1.19726e-08, -1.004, -4.38862e-08, 1.19726e-08, 1.19726e-08, 1.19726e-08, 1.004, 5, -3, 2.08213e-12)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 768, 256, 256)
+
+[node name="grass_path_edge12" type="Sprite3D" parent="Environment"]
+transform = Transform3D(-4.38862e-08, 1.004, -1.19726e-08, -1.004, -4.38862e-08, 1.19726e-08, 1.19726e-08, 1.19726e-08, 1.004, 6, -3, 2.08213e-12)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 512, 256, 256)
+
+[node name="grass_path_edge9" type="Sprite3D" parent="Environment"]
+transform = Transform3D(-4.38862e-08, 1.004, -1.19726e-08, -1.004, -4.38862e-08, 1.19726e-08, 1.19726e-08, 1.19726e-08, 1.004, 7, -3, 2.08213e-12)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 768, 256, 256)
+
+[node name="grass_path_edge13" type="Sprite3D" parent="Environment"]
+transform = Transform3D(-4.38862e-08, 1.004, -1.19726e-08, -1.004, -4.38862e-08, 1.19726e-08, 1.19726e-08, 1.19726e-08, 1.004, 8, -3, 2.08213e-12)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 512, 256, 256)
+
+[node name="grass_path_edge14" type="Sprite3D" parent="Environment"]
+transform = Transform3D(-4.38862e-08, 1.004, -1.19726e-08, -1.004, -4.38862e-08, 1.19726e-08, 1.19726e-08, 1.19726e-08, 1.004, 9, -3, 2.08213e-12)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 768, 256, 256)
+
+[node name="grass_path_edge20" type="Sprite3D" parent="Environment"]
+transform = Transform3D(-4.38862e-08, 1.004, -1.19726e-08, -1.004, -4.38862e-08, 1.19726e-08, 1.19726e-08, 1.19726e-08, 1.004, 10, -3, 2.08213e-12)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 512, 256, 256)
+
+[node name="grass_path_edge25" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.31659e-07, -1.004, 1.19726e-08, 1.004, 1.31659e-07, 1.19726e-08, -1.19726e-08, 1.19726e-08, 1.004, 11, -9, 7.15515e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 512, 256, 256)
+
+[node name="grass_path_edge26" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.31659e-07, -1.004, 1.19726e-08, 1.004, 1.31659e-07, 1.19726e-08, -1.19726e-08, 1.19726e-08, 1.004, 10, -9, 7.15515e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 768, 256, 256)
+
+[node name="grass_path_edge27" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.31659e-07, -1.004, 1.19726e-08, 1.004, 1.31659e-07, 1.19726e-08, -1.19726e-08, 1.19726e-08, 1.004, 9, -9, 7.15515e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 512, 256, 256)
+
+[node name="grass_path_edge28" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.31659e-07, -1.004, 1.19726e-08, 1.004, 1.31659e-07, 1.19726e-08, -1.19726e-08, 1.19726e-08, 1.004, 8, -9, 7.15515e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 768, 256, 256)
+
+[node name="grass_path_edge29" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.31659e-07, -1.004, 1.19726e-08, 1.004, 1.31659e-07, 1.19726e-08, -1.19726e-08, 1.19726e-08, 1.004, 7, -9, 7.15515e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 512, 256, 256)
+
+[node name="grass_path_edge30" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.31659e-07, -1.004, 1.19726e-08, 1.004, 1.31659e-07, 1.19726e-08, -1.19726e-08, 1.19726e-08, 1.004, 6, -9, 7.15515e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 768, 256, 256)
+
+[node name="grass_path_edge31" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.31659e-07, -1.004, 1.19726e-08, 1.004, 1.31659e-07, 1.19726e-08, -1.19726e-08, 1.19726e-08, 1.004, 5, -9, 7.15515e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 512, 256, 256)
+
+[node name="grass_path_edge32" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.31659e-07, -1.004, 1.19726e-08, 1.004, 1.31659e-07, 1.19726e-08, -1.19726e-08, 1.19726e-08, 1.004, 4, -9, 7.15515e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 512, 256, 256)
+
+[node name="grass_path_edge33" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.31659e-07, -1.004, 1.19726e-08, 1.004, 1.31659e-07, 1.19726e-08, -1.19726e-08, 1.19726e-08, 1.004, 3, -9, 7.15515e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 768, 256, 256)
+
+[node name="grass_path_edge34" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.31659e-07, -1.004, 1.19726e-08, 1.004, 1.31659e-07, 1.19726e-08, -1.19726e-08, 1.19726e-08, 1.004, 2, -9, 7.15515e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 512, 256, 256)
+
+[node name="grass_path_edge35" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.31659e-07, -1.004, 1.19726e-08, 1.004, 1.31659e-07, 1.19726e-08, -1.19726e-08, 1.19726e-08, 1.004, 1, -9, 7.15515e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 768, 256, 256)
+
+[node name="grass_path_edge36" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.31659e-07, -1.004, 1.19726e-08, 1.004, 1.31659e-07, 1.19726e-08, -1.19726e-08, 1.19726e-08, 1.004, -2.08165e-12, -9, 7.15515e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 512, 256, 256)
+
+[node name="grass_path_edge37" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.31659e-07, -1.004, 1.19726e-08, 1.004, 1.31659e-07, 1.19726e-08, -1.19726e-08, 1.19726e-08, 1.004, -1, -9, 7.15515e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 768, 256, 256)
+
+[node name="grass_path_edge38" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.31659e-07, -1.004, 1.19726e-08, 1.004, 1.31659e-07, 1.19726e-08, -1.19726e-08, 1.19726e-08, 1.004, -2, -9, 7.15515e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 512, 256, 256)
+
+[node name="grass_path_edge21" type="Sprite3D" parent="Environment"]
+transform = Transform3D(-1.004, -8.77725e-08, -2.563e-16, 8.77725e-08, -1.004, 2.39452e-08, -1.58499e-16, 2.39452e-08, 1.004, 12, -4, 1.1927e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 768, 256, 256)
+
+[node name="grass_path_edge22" type="Sprite3D" parent="Environment"]
+transform = Transform3D(-1.004, -8.77725e-08, -2.563e-16, 8.77725e-08, -1.004, 2.39452e-08, -1.58499e-16, 2.39452e-08, 1.004, 12, -5, 2.38519e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 512, 256, 256)
+
+[node name="grass_path_edge23" type="Sprite3D" parent="Environment"]
+transform = Transform3D(-1.004, -8.77725e-08, -2.563e-16, 8.77725e-08, -1.004, 2.39452e-08, -1.58499e-16, 2.39452e-08, 1.004, 12, -6, 3.57768e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 768, 256, 256)
+
+[node name="grass_path_edge24" type="Sprite3D" parent="Environment"]
+transform = Transform3D(-1.004, -8.77725e-08, -2.563e-16, 8.77725e-08, -1.004, 2.39452e-08, -1.58499e-16, 2.39452e-08, 1.004, 12, -7, 4.77017e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 512, 256, 256)
+
+[node name="grass_path_center" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.004, -2.10433e-37, 1.51166e-37, 2.53074e-39, 1.004, 0, -6.34848e-32, -2.52749e-16, 1.004, 2, 1, -1.19228e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(512, 512, 256, 256)
+
+[node name="grass_path_center2" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.004, -2.10433e-37, 1.51166e-37, 9.10631e-39, 1.004, 0, -6.34848e-32, -2.52749e-16, 1.004, 2, 2.08165e-12, 2.08011e-12)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(512, 512, 256, 256)
+
+[node name="grass_path_center4" type="Sprite3D" parent="Environment"]
+transform = Transform3D(5.01785, 2.89207e-36, 1.00974e-28, 1.83297e-37, 7.04994, 0, -1.30398e-30, 1.34676e-15, 1.00273, -3, -8, 9.54013e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(512, 512, 256, 256)
+
+[node name="grass_path_center3" type="Sprite3D" parent="Environment"]
+transform = Transform3D(9.20474, 8.1702e-37, -1.00974e-28, 4.9973e-37, 4.04002, -1.77636e-15, 2.42688e-30, -4.79178e-16, 1.00246, 2, -8, 9.54013e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(512, 512, 256, 256)
+
+[node name="grass_path_outer" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.004, 0, 0, 0, 1.004, 0, 0, 0, 1.004, 1, 2, -2.38477e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 256, 256, 256)
+
+[node name="grass_path_outer4" type="Sprite3D" parent="Environment"]
+transform = Transform3D(-4.38862e-08, 1.004, -1.19726e-08, -1.004, -4.38862e-08, 1.19726e-08, 1.19726e-08, 1.19726e-08, 1.004, 11, -3, 3.57768e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 256, 256, 256)
+
+[node name="grass_path_outer5" type="Sprite3D" parent="Environment"]
+transform = Transform3D(-1.004, -8.77725e-08, -2.563e-16, 8.77725e-08, -1.004, 2.39452e-08, -1.58499e-16, 2.39452e-08, 1.004, 12, -8, 9.54013e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 256, 256, 256)
+
+[node name="grass_path_outer2" type="Sprite3D" parent="Environment"]
+transform = Transform3D(-4.38862e-08, 1.004, -1.19726e-08, -1.004, -4.38862e-08, 1.19726e-08, 1.19726e-08, 1.19726e-08, 1.004, 3, 3, -3.57726e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 256, 256, 256)
+
+[node name="grass_path_outer3" type="Sprite3D" parent="Environment"]
+transform = Transform3D(-1.004, -8.77725e-08, -2.563e-16, 8.77725e-08, -1.004, 2.39452e-08, -1.58499e-16, 2.39452e-08, 1.004, 4, 2.08165e-12, 2.07834e-12)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(256, 256, 256, 256)
+
+[node name="grass_path_edge15" type="Sprite3D" parent="Environment"]
+transform = Transform3D(-4.38862e-08, 1.004, -1.19726e-08, -1.004, -4.38862e-08, 1.19726e-08, 1.19726e-08, 1.19726e-08, 1.004, 3, 2, -2.38477e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(512, 256, 256, 256)
+
+[node name="grass_path_edge17" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.004, 9.16807e-17, 2.49197e-16, 1.06338e-23, 1.004, 8.88178e-16, -4.17588e-24, -2.91728e-15, 1.004, 2, 2, -2.38477e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(512, 256, 256, 256)
+
+[node name="grass_path_edge16" type="Sprite3D" parent="Environment"]
+transform = Transform3D(-4.38862e-08, 1.004, -1.19726e-08, -1.004, -4.38862e-08, 1.19726e-08, 1.19726e-08, 1.19726e-08, 1.004, 3, 1, -1.19228e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(768, 256, 256, 256)
+
+[node name="grass_path_edge18" type="Sprite3D" parent="Environment"]
+transform = Transform3D(-4.38862e-08, 1.004, -1.19726e-08, -1.004, -4.38862e-08, 1.19726e-08, 1.19726e-08, 1.19726e-08, 1.004, 2, -1, 1.1927e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(512, 256, 256, 256)
+
+[node name="grass_path_edge39" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.004, 9.16807e-17, 2.49197e-16, 1.06338e-23, 1.004, 8.88178e-16, -4.17588e-24, -2.91728e-15, 1.004, -2.08165e-12, -1, 1.1927e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(512, 256, 256, 256)
+
+[node name="grass_path_edge40" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.004, 9.16807e-17, 2.49197e-16, 1.06338e-23, 1.004, 8.88178e-16, -4.17588e-24, -2.91728e-15, 1.004, -1, -1, 1.1927e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(512, 256, 256, 256)
+
+[node name="grass_path_edge41" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.004, 9.16807e-17, 2.49197e-16, 1.06338e-23, 1.004, 8.88178e-16, -4.17588e-24, -2.91728e-15, 1.004, -2, -1, 1.1927e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(512, 256, 256, 256)
+
+[node name="grass_path_edge42" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1.004, 9.16807e-17, 2.49197e-16, 1.06338e-23, 1.004, 8.88178e-16, -4.17588e-24, -2.91728e-15, 1.004, -3, -1, 1.1927e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(512, 256, 256, 256)
+
+[node name="grass_path_edge19" type="Sprite3D" parent="Environment"]
+transform = Transform3D(-4.38862e-08, 1.004, -1.19726e-08, -1.004, -4.38862e-08, 1.19726e-08, 1.19726e-08, 1.19726e-08, 1.004, 2, -2, 2.38519e-08)
+centered = false
+pixel_size = 0.0039
+transparent = false
+shaded = true
+double_sided = false
+alpha_hash_scale = 0.92
+alpha_antialiasing_mode = 1
+texture_filter = 0
+texture = ExtResource("3_hd21j")
+region_enabled = true
+region_rect = Rect2(768, 256, 256, 256)
+
+[node name="Player" parent="." instance=ExtResource("2_nnovq")]
+transform = Transform3D(0.999999, 0.00152076, -0.00056722, -0.00152076, 0.999999, 1.36997e-05, 0.00056724, -1.2841e-05, 1, 2.97514, 0.00383853, 0.831963)
+max_speed = 2.0
+acceleration_scale = 0.1
+
+[node name="DialogueTrigger" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.42628, 0, -0.776628)
+disable_mode = 2
+script = ExtResource("5_bsupx")
+dialogue = SubResource("Resource_pywt1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DialogueTrigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.583978, 0)
+shape = SubResource("BoxShape3D_npf42")
+
+[node name="InteractLabel" type="Label3D" parent="DialogueTrigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.826148, 0)
+billboard = 1
+text = "Talk"
+font = SubResource("FontVariation_ygks7")
+font_size = 40
+uppercase = true
+
+[node name="BattleScene" parent="." instance=ExtResource("8_x0aji")]
+
+[connection signal="body_entered" from="DialogueTrigger" to="DialogueTrigger" method="_on_body_entered"]
+[connection signal="body_exited" from="DialogueTrigger" to="DialogueTrigger" method="_on_body_exited"]

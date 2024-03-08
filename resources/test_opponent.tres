@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="OpponentResource" load_steps=2 format=3 uid="uid://k7e45u6lnmj4"]
+
+[ext_resource type="Script" path="res://scripts/OpponentResource.gd" id="1_iooay"]
+
+[resource]
+script = ExtResource("1_iooay")
+ego = 100
+sol = 5
+men = 5
+phy = 5
+prs = 5
+soc = 5
+brain_health = 50
+eye_r_health = 30
+eye_l_health = 30
+mouth_health = 50

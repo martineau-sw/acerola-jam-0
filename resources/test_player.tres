@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PlayerResource" load_steps=2 format=3 uid="uid://wdkj373db14b"]
+
+[ext_resource type="Script" path="res://scripts/PlayerResource.gd" id="1_gnwgt"]
+
+[resource]
+script = ExtResource("1_gnwgt")
+ego_max = 50
+ego = 0
+sol = 7
+men = 7
+phy = 7
+prs = 7
+soc = 7
