@@ -18,7 +18,8 @@ func _process(delta):
 		0,
 		target.global_position.z - global_position.z + 3.5)
 	
-	position += velocity * delta
+	position += velocity * delta * 2.
+
 	
 
 	

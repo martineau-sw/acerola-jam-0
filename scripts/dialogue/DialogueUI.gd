@@ -20,10 +20,10 @@ func _ready():
 	)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	scroll(delta)
-
-func scroll(delta):
+func _process(_delta):
+	scroll()
+	
+func scroll():
 	if(text_box.visible_ratio > 1. || text_box.get_total_character_count() == 0):
 		return
 	text_box.visible_ratio += 1. / text_box.get_total_character_count()

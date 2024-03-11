@@ -18,10 +18,9 @@ func _ready():
 	
 	ego_damaged.connect(
 		func(amt):
+			print("player ego damaged: %d" % amt)
 			ego -= amt
 			if(ego <= 0): ego_empty.emit()
+			BattleManager.enqueue.emit("player_damaged")
 	)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass

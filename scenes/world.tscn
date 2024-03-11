@@ -851,6 +851,7 @@ font_size = 40
 uppercase = true
 
 [node name="BattleScene" parent="." instance=ExtResource("8_x0aji")]
+visible = false
 
 [connection signal="body_entered" from="DialogueTrigger" to="DialogueTrigger" method="_on_body_entered"]
 [connection signal="body_exited" from="DialogueTrigger" to="DialogueTrigger" method="_on_body_exited"]

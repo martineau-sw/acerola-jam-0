@@ -29,37 +29,48 @@ signal mouth_empty
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	ego_damaged.connect(
+		func(amt):
+			print("enemy ego damaged: %d" % amt)
+			ego -= amt
+			if(ego <= 0):
+				ego_empty.emit()
+			BattleManager.enqueue.emit("enemy_damaged")
+	)
+	
 	brain_damaged.connect(
 		func(amt):
+			print("enemy brain damaged: %d" % amt)
 			brain_health -= amt
 			if(brain_health <= 0):
 				brain_empty.emit()
+			BattleManager.enqueue.emit("brain_damaged")
 	)
 	
 	eye_r_damaged.connect(
 		func(amt):
+			print("enemy right eye damaged: %d" % amt)
 			eye_r_health -= amt
 			if(eye_r_health <= 0):
 				eye_r_empty.emit()
+			BattleManager.enqueue.emit("eye_r_damaged")
 	)
 	
 	eye_l_damaged.connect(
 		func(amt):
+			print("enemy left eye damaged: %d" % amt)
 			eye_l_health -= amt
 			if(eye_l_health <= 0):
 				eye_l_empty.emit()
+			BattleManager.enqueue.emit("eye_l_damaged")
 	)
 	
 	mouth_damaged.connect(
 		func(amt):
+			print("enemy mouth damaged: %d" % amt)
 			mouth_health -= amt
 			if(mouth_health <= 0):
 				mouth_empty.emit()
+			BattleManager.enqueue.emit("mouth_damaged")
 	)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 

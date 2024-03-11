@@ -1,10 +1,12 @@
-[gd_scene load_steps=23 format=3 uid="uid://dkv5ivkfuo2fs"]
+[gd_scene load_steps=27 format=3 uid="uid://dkv5ivkfuo2fs"]
 
 [ext_resource type="Texture2D" uid="uid://bac8p7nfew2wa" path="res://images/brain.png" id="1_axjbj"]
 [ext_resource type="Script" path="res://scripts/BattleUI.gd" id="1_v5g7h"]
 [ext_resource type="Texture2D" uid="uid://c6iphw1bokhuh" path="res://images/eye.png" id="2_t7t8y"]
 [ext_resource type="Texture2D" uid="uid://bot21pti3rj2k" path="res://images/mouth.png" id="3_vq7ri"]
 [ext_resource type="FontFile" uid="uid://dx8pl7yyueapr" path="res://fonts/FeltTipWomanBold.otf" id="4_r7vtw"]
+[ext_resource type="Gradient" uid="uid://dcjkaqou3djkc" path="res://images/clear_gradient.tres" id="5_p3iqj"]
+[ext_resource type="Script" path="res://scripts/BattleFX.gd" id="7_4mqug"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_crkkh"]
 blend_mode = 2
@@ -24,8 +26,32 @@ noise = SubResource("FastNoiseLite_y5qpl")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t0gr5"]
 
+[sub_resource type="Shader" id="Shader_ib3ju"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.2.1.stable's CanvasItemMaterial.
+
+shader_type canvas_item;
+render_mode blend_add;
+
+
+void fragment() {
+	vec4 basis = vec4(1, 1, 1, 1);
+    COLOR = texture(TEXTURE, UV) * basis;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_06bfs"]
+shader = SubResource("Shader_ib3ju")
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yb5yt"]
 blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v8b1f"]
+blend_mode = 3
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5q86i"]
+gradient = ExtResource("5_p3iqj")
+fill = 1
+fill_from = Vector2(0.517094, 0.489316)
+fill_to = Vector2(0.905983, 0.106838)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n2ntv"]
 bg_color = Color(0, 0, 0, 1)
@@ -51,119 +77,183 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g7o0k"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v8b1f"]
-blend_mode = 3
-
-[sub_resource type="Gradient" id="Gradient_2tjw2"]
-offsets = PackedFloat32Array(0.376254, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_0k8ul"]
-gradient = SubResource("Gradient_2tjw2")
-fill = 1
-fill_from = Vector2(0.517094, 0.489316)
-
-[sub_resource type="Animation" id="Animation_8xicp"]
-resource_name = "player_damaged"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect2:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(-0.00105286, 0.0354464, 0.123185),
-"transitions": PackedFloat32Array(0.329877, 1, 0.329877),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_a1r67"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect2:color")
+tracks/0/path = NodePath("Opponent/Brain:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 0)]
+"values": [Vector2(419, 12)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Opponent/RightEye:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(746, 114)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Opponent/LeftEye:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(306, 138)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Opponent/Mouth:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(514, 241)]
+}
+
+[sub_resource type="Animation" id="Animation_8xicp"]
+resource_name = "player_damaged"
+length = 0.2
+
+[sub_resource type="Animation" id="Animation_l2rt0"]
+resource_name = "idle"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Opponent/Brain:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.40488, 3.23884, 5),
+"transitions": PackedFloat32Array(1, 1.31951, 3.03143, 1),
+"update": 0,
+"values": [Vector2(419, 12), Vector2(452.07, 0.2), Vector2(428.74, 24.46), Vector2(419, 12)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Opponent/RightEye:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.39173, 3.86592, 5.01718),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(746, 114), Vector2(804.79, 106.33), Vector2(743.5, 105.64), Vector2(746, 114)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Opponent/LeftEye:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.92437, 4.36419, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(306, 138), Vector2(287.31, 138), Vector2(311.31, 130.63), Vector2(306, 138)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Opponent/Mouth:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.927821, 4.03774, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(514, 241), Vector2(517.3, 235.52), Vector2(505.88, 245.04), Vector2(514, 241)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jowgb"]
 _data = {
 "RESET": SubResource("Animation_a1r67"),
+"idle": SubResource("Animation_l2rt0"),
 "player_damaged": SubResource("Animation_8xicp")
 }
 
 [node name="BattleScene" type="CanvasLayer"]
 script = ExtResource("1_v5g7h")
+metadata/_edit_vertical_guides_ = [-490.0]
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorFilter" type="ColorRect" parent="."]
 offset_right = 1302.0
 offset_bottom = 1052.0
+mouse_filter = 2
 color = Color(0.419608, 0, 0, 1)
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="ColorFilter"]
 material = SubResource("CanvasItemMaterial_crkkh")
 offset_right = 1295.0
 offset_bottom = 1249.0
+mouse_filter = 2
 texture = SubResource("NoiseTexture2D_a2ats")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Control" type="Control" parent="VBoxContainer"]
+[node name="Opponent" type="Control" parent="."]
 material = SubResource("ShaderMaterial_t0gr5")
-layout_mode = 2
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 477.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
+mouse_filter = 2
 
-[node name="Brain" type="TextureButton" parent="VBoxContainer/Control"]
-material = SubResource("CanvasItemMaterial_yb5yt")
+[node name="Brain" type="TextureButton" parent="Opponent"]
+material = SubResource("ShaderMaterial_06bfs")
 layout_mode = 0
 offset_left = 419.0
 offset_top = 12.0
-offset_right = 1322.0
+offset_right = 1322.01
 offset_bottom = 784.0
 scale = Vector2(0.35, 0.35)
 mouse_default_cursor_shape = 3
 texture_normal = ExtResource("1_axjbj")
 
-[node name="RightEye" type="TextureButton" parent="VBoxContainer/Control"]
+[node name="RightEye" type="TextureButton" parent="Opponent"]
 material = SubResource("CanvasItemMaterial_yb5yt")
 layout_mode = 0
 offset_left = 746.0
 offset_top = 114.0
-offset_right = 1080.0
+offset_right = 1080.04
 offset_bottom = 464.0
 scale = Vector2(0.35, 0.35)
 mouse_default_cursor_shape = 3
 texture_normal = ExtResource("2_t7t8y")
 
-[node name="LeftEye" type="TextureButton" parent="VBoxContainer/Control"]
+[node name="LeftEye" type="TextureButton" parent="Opponent"]
 material = SubResource("CanvasItemMaterial_yb5yt")
 layout_mode = 0
 offset_left = 306.0
 offset_top = 138.0
-offset_right = 640.0
+offset_right = 640.004
 offset_bottom = 488.0
 scale = Vector2(0.35, 0.35)
 mouse_default_cursor_shape = 3
 texture_normal = ExtResource("2_t7t8y")
 flip_h = true
 
-[node name="Mouth" type="TextureButton" parent="VBoxContainer/Control"]
+[node name="Mouth" type="TextureButton" parent="Opponent"]
 material = SubResource("CanvasItemMaterial_yb5yt")
 layout_mode = 0
 offset_left = 514.0
@@ -175,55 +265,94 @@ mouse_default_cursor_shape = 3
 texture_normal = ExtResource("3_vq7ri")
 flip_h = true
 
-[node name="Control2" type="Control" parent="VBoxContainer"]
+[node name="Vignette" type="TextureRect" parent="."]
+material = SubResource("CanvasItemMaterial_v8b1f")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -305.0
+offset_right = 27.0
+offset_bottom = 337.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_default_cursor_shape = 8
+texture = SubResource("GradientTexture2D_5q86i")
+stretch_mode = 4
+
+[node name="Player" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="TopMargin" type="Control" parent="Player"]
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 2.5
+mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Control2"]
+[node name="UI" type="Control" parent="Player"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Panels" type="HBoxContainer" parent="Player/UI"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
-[node name="Control2" type="Control" parent="VBoxContainer/Control2/HBoxContainer"]
+[node name="LeftMargin" type="Control" parent="Player/UI/Panels"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.2
+mouse_filter = 2
 
-[node name="Stats" type="Panel" parent="VBoxContainer/Control2/HBoxContainer"]
+[node name="Stats" type="Panel" parent="Player/UI/Panels"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_n2ntv")
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Control2/HBoxContainer/Stats"]
+[node name="Margins" type="MarginContainer" parent="Player/UI/Panels/Stats"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Control2/HBoxContainer/Stats/MarginContainer"]
+[node name="Labels" type="VBoxContainer" parent="Player/UI/Panels/Stats/Margins"]
 layout_mode = 2
+mouse_filter = 2
 
-[node name="PlayerLabel" type="Label" parent="VBoxContainer/Control2/HBoxContainer/Stats/MarginContainer/VBoxContainer"]
+[node name="PlayerLabel" type="Label" parent="Player/UI/Panels/Stats/Margins/Labels"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("4_r7vtw")
 theme_override_font_sizes/font_size = 50
 text = "Me"
 
-[node name="EgoContainer" type="HBoxContainer" parent="VBoxContainer/Control2/HBoxContainer/Stats/MarginContainer/VBoxContainer"]
+[node name="Ego" type="HBoxContainer" parent="Player/UI/Panels/Stats/Margins/Labels"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
-[node name="Label2" type="Label" parent="VBoxContainer/Control2/HBoxContainer/Stats/MarginContainer/VBoxContainer/EgoContainer"]
+[node name="Name" type="Label" parent="Player/UI/Panels/Stats/Margins/Labels/Ego"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -231,18 +360,19 @@ theme_override_fonts/font = ExtResource("4_r7vtw")
 theme_override_font_sizes/font_size = 50
 text = "EGO "
 
-[node name="Label3" type="Label" parent="VBoxContainer/Control2/HBoxContainer/Stats/MarginContainer/VBoxContainer/EgoContainer"]
+[node name="Value" type="Label" parent="Player/UI/Panels/Stats/Margins/Labels/Ego"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("4_r7vtw")
 theme_override_font_sizes/font_size = 50
 
-[node name="SoulContainer" type="HBoxContainer" parent="VBoxContainer/Control2/HBoxContainer/Stats/MarginContainer/VBoxContainer"]
+[node name="Soul" type="HBoxContainer" parent="Player/UI/Panels/Stats/Margins/Labels"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
-[node name="Label4" type="Label" parent="VBoxContainer/Control2/HBoxContainer/Stats/MarginContainer/VBoxContainer/SoulContainer"]
+[node name="Name" type="Label" parent="Player/UI/Panels/Stats/Margins/Labels/Soul"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -250,40 +380,44 @@ theme_override_fonts/font = ExtResource("4_r7vtw")
 theme_override_font_sizes/font_size = 50
 text = "SOL "
 
-[node name="Label5" type="Label" parent="VBoxContainer/Control2/HBoxContainer/Stats/MarginContainer/VBoxContainer/SoulContainer"]
+[node name="Value" type="Label" parent="Player/UI/Panels/Stats/Margins/Labels/Soul"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("4_r7vtw")
 theme_override_font_sizes/font_size = 50
 
-[node name="Control3" type="Control" parent="VBoxContainer/Control2/HBoxContainer"]
+[node name="CenterMargin" type="Control" parent="Player/UI/Panels"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
+mouse_filter = 2
 
-[node name="BattleOptions" type="Panel" parent="VBoxContainer/Control2/HBoxContainer"]
+[node name="Options" type="Panel" parent="Player/UI/Panels"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_n2ntv")
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Control2/HBoxContainer/BattleOptions"]
+[node name="Margins" type="MarginContainer" parent="Player/UI/Panels/Options"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Control2/HBoxContainer/BattleOptions/MarginContainer"]
+[node name="Buttons" type="HBoxContainer" parent="Player/UI/Panels/Options/Margins"]
 layout_mode = 2
+mouse_filter = 2
 
-[node name="AttackButton" type="Button" parent="VBoxContainer/Control2/HBoxContainer/BattleOptions/MarginContainer/HBoxContainer"]
+[node name="Attack" type="Button" parent="Player/UI/Panels/Options/Margins/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.909804, 0.909804, 0.909804, 1)
@@ -301,7 +435,7 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_g7o0k")
 text = "Attack"
 flat = true
 
-[node name="DefendButton" type="Button" parent="VBoxContainer/Control2/HBoxContainer/BattleOptions/MarginContainer/HBoxContainer"]
+[node name="Defend" type="Button" parent="Player/UI/Panels/Options/Margins/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.909804, 0.909804, 0.909804, 1)
@@ -319,7 +453,7 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_g7o0k")
 text = "Defend"
 flat = true
 
-[node name="NothingButton" type="Button" parent="VBoxContainer/Control2/HBoxContainer/BattleOptions/MarginContainer/HBoxContainer"]
+[node name="Nothing" type="Button" parent="Player/UI/Panels/Options/Margins/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.909804, 0.909804, 0.909804, 1)
@@ -337,35 +471,23 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_g7o0k")
 text = "Nothing"
 flat = true
 
-[node name="Control" type="Control" parent="VBoxContainer/Control2/HBoxContainer"]
+[node name="RightMargin" type="Control" parent="Player/UI/Panels"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.2
-
-[node name="ColorRect2" type="TextureRect" parent="."]
-material = SubResource("CanvasItemMaterial_v8b1f")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -8.0
-offset_top = -305.0
-offset_right = 27.0
-offset_bottom = 337.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = SubResource("GradientTexture2D_0k8ul")
-stretch_mode = 4
+mouse_filter = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_jowgb")
 }
+script = ExtResource("7_4mqug")
 
-[connection signal="button_up" from="VBoxContainer/Control/Brain" to="." method="_on_brain_button_up"]
-[connection signal="pressed" from="VBoxContainer/Control/RightEye" to="." method="_on_right_eye_pressed"]
-[connection signal="pressed" from="VBoxContainer/Control/LeftEye" to="." method="_on_left_eye_pressed"]
-[connection signal="pressed" from="VBoxContainer/Control/Mouth" to="." method="_on_mouth_pressed"]
-[connection signal="button_up" from="VBoxContainer/Control2/HBoxContainer/BattleOptions/MarginContainer/HBoxContainer/AttackButton" to="." method="_on_attack_button_button_up"]
-[connection signal="button_up" from="VBoxContainer/Control2/HBoxContainer/BattleOptions/MarginContainer/HBoxContainer/DefendButton" to="." method="_on_defend_button_button_up"]
-[connection signal="button_up" from="VBoxContainer/Control2/HBoxContainer/BattleOptions/MarginContainer/HBoxContainer/NothingButton" to="." method="_on_nothing_button_button_up"]
+[connection signal="button_up" from="Opponent/Brain" to="." method="_on_brain_button_up"]
+[connection signal="pressed" from="Opponent/RightEye" to="." method="_on_right_eye_pressed"]
+[connection signal="pressed" from="Opponent/LeftEye" to="." method="_on_left_eye_pressed"]
+[connection signal="pressed" from="Opponent/Mouth" to="." method="_on_mouth_pressed"]
+[connection signal="button_up" from="Player/UI/Panels/Options/Margins/Buttons/Attack" to="." method="_on_attack_button_button_up"]
+[connection signal="button_up" from="Player/UI/Panels/Options/Margins/Buttons/Defend" to="." method="_on_defend_button_button_up"]
+[connection signal="button_up" from="Player/UI/Panels/Options/Margins/Buttons/Nothing" to="." method="_on_nothing_button_button_up"]
+[connection signal="animation_finished" from="AnimationPlayer" to="AnimationPlayer" method="_on_animation_finished"]
